@@ -168,8 +168,8 @@ def main_menu():
                 if event.button == 1:
                     if start_game_button.collidepoint((mouse_x, mouse_y)):
                         game()
-                    if options_button.collidepoint((mouse_x, mouse_y)):
-                        options()
+                    if rules_button.collidepoint((mouse_x, mouse_y)):
+                        rules()
                     if highscore_button.collidepoint((mouse_x, mouse_y)):
                         highscore()
                     if about_author_button.collidepoint((mouse_x, mouse_y)):
@@ -181,8 +181,8 @@ def main_menu():
             screen.blit(line, (lines[i].x, lines[i].y))
         start_game_button = pygame.Rect(400, 200, 400, 75)
         pygame.draw.rect(screen, (menu_button_color), start_game_button)
-        options_button = pygame.Rect(400, 325, 400, 75)
-        pygame.draw.rect(screen, (menu_button_color), options_button)
+        rules_button = pygame.Rect(400, 325, 400, 75)
+        pygame.draw.rect(screen, (menu_button_color), rules_button)
         highscore_button = pygame.Rect(400, 450, 400, 75)
         pygame.draw.rect(screen, (menu_button_color), highscore_button)
         about_author_button = pygame.Rect(400, 575, 400, 75)
@@ -190,7 +190,7 @@ def main_menu():
         exit_button = pygame.Rect(400, 700, 400, 75)
         pygame.draw.rect(screen, (menu_button_color), exit_button)
         message_display("Start game", screen_width/2, 240, 48, "center")
-        message_display("Options", screen_width/2, 365, 48, "center")
+        message_display("Rules", screen_width/2, 365, 48, "center")
         message_display("Highscore", screen_width/2, 490, 48, "center")
         message_display("About author", screen_width/2, 615, 48, "center")
         message_display("Exit", screen_width/2, 740, 48, "center")     
@@ -259,7 +259,13 @@ def game():
         window(mcr,heart_list,lines,current_car_list,score)
     pygame.quit()
 
-def options():
+def rules():
+    abt = "RULES"
+    abt1_5 =  "Use WASD or arrows to move your car"
+    abt2 =  "Evade other cars"
+    abt2_5 = "The more score you get, the faster the"
+    abt3 = "game will be,"
+    abt4 = "Good luck!"
     score = 0
     lines = []
     for i in range(1,5):
@@ -273,16 +279,23 @@ def options():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1 and go_back_button.collidepoint((mouse_x,mouse_y)):
-                    main_menu()
+                if event.button == 1:
+                    if go_back_button.collidepoint((mouse_x, mouse_y)):
+                        main_menu() 
         screen.blit(road, (0,0))
         for i in range(len(lines)):
             screen.blit(line, (lines[i].x, lines[i].y))
-        option1 = pygame.Rect(400, 200, 400, 75)
-        pygame.draw.rect(screen, (menu_button_color), option1)
+        abt_rect = pygame.Rect(400, 100, 400, 350)
+        pygame.draw.rect(screen, (menu_button_color), abt_rect)
+        message_display(abt, 600, 140, 30, "center")
+        message_display(abt1_5, 420, 180, 20, "left")
+        message_display(abt2, 420, 230, 20, "left")
+        message_display(abt2_5, 420, 280, 20, "left")
+        message_display(abt3, 420, 300, 20, "left")
+        message_display(abt4, 420, 350, 20, "left")
         go_back_button = pygame.Rect(350, 750, 500,75)
         pygame.draw.rect(screen, (menu_button_color), go_back_button)
-        message_display("Go back to menu", screen_width/2, 790, 48, "center") 
+        message_display("Go back to menu", screen_width/2, 790, 48, "center")
         pygame.display.update()
         if lines[-1].y > 200:
             for i in range(1,5):
